@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=PyCharm Professional Edition
+Icon=pycharm
+Comment=The Python IDE for Professional Developers.
+Exec=/opt/pycharm/bin/pycharm.sh %f
+Categories=Development;IDE;
+Terminal=false

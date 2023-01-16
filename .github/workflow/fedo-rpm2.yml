@@ -1,0 +1,36 @@
+name: build-fedora-packages
+run-name: ${{ github.actor }} is learning GitHub Actions
+# when the repository was pushed a change, the github action triggers
+on: [push]
+jobs:
+  # job 1
+  build:
+    runs-on: ${{ matrix.os }}
+    container: "fedora:rawhide"
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+      fail-fast: false
+  build-on-opensuse:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        opensuse_version: [ 'tumbleweed', 'leap:15.4' ]
+        qt_version: [ 'qt5', 'qt6' ]
+      fail-fast: false
+    container: ${{ matrix. }}
+  # job 2
+  build-vscode:
+    runs-on: ubuntu-latest
+    container: "fedora:rawhide"
+    steps:
+      - name: "Install build dependencies"
+        shell: bash
+        run: "dnf install -y git"
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v

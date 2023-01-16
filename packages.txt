@@ -1,0 +1,1 @@
+https://raw.githubusercontent.com/topazus/fedora-copr/main/jetbrains-idea/idea.spec

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Ruby Mine
+Icon=rubymine
+Comment=The Ruby on Rails IDE
+Exec=/opt/rubymine/bin/rubymine.sh %f
+Categories=Development;IDE;
+Terminal=false
+StartupNotify=true

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Intellij IDEA
+Icon=idea
+Comment=An intelligent IDE for Java, Groovy and other programming languages.
+Exec=/opt/idea/bin/idea.sh %f
+Terminal=false
+Categories=Development;IDE;

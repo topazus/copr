@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=VPaint
+Comment=Vector-Based Animation Editor
+Exec=vpaint
+Icon=VPaint
+Terminal=false
+Type=Application
+Categories=Graphics;

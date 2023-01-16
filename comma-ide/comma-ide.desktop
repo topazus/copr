@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Comma Community Edition
+Icon=comma
+Comment=The Integrated Development Environment for Raku.
+Exec=/opt/comma-ide/bin/comma.sh %f
+Categories=Development;IDE;
+Terminal=false
+StartupNotify=true
+StartupWMClass=comma-community

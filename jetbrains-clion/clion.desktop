@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Clion
+Icon=clion
+Comment=A Cross-Platform IDE for C and C++
+Exec=/opt/clion/bin/clion.sh %f
+Terminal=false
+Categories=Development;IDE;

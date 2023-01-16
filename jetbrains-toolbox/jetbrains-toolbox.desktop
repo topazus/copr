@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=JetBrains Toolbox
+Type=Application
+Exec=/opt/jetbrains-toolbox/jetbrains-toolbox %u
+Icon=jetbrains-toolbox
+StartupNotify=false
+StartupWMClass=jetbrains-toolbox
+Terminal=false
