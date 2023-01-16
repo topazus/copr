@@ -26,11 +26,10 @@ Visual Studio Code Insiders
 mkdir -p %{buildroot}/opt/vscode-insider
 cp -r * %{buildroot}/opt/vscode-insider
 
-#install -pDm755 bin/code %{buildroot}%{_bindir}/code
 install -pDm644 ./resources/app/resources/linux/code.png %{buildroot}/usr/share/icons/vscode-insider.png
 
-install -pDm644 ./resources/completions/bash/code %{buildroot}/usr/share/bash-completion/completions/code-insider
-install -pDm644 ./resources/completions/zsh/_code %{buildroot}/usr/share/zsh/site-functions/_code-insider
+install -pDm644 ./resources/completions/bash/code-insiders %{buildroot}/usr/share/bash-completion/completions/code-insiders
+install -pDm644 ./resources/completions/zsh/_code-insiders %{buildroot}/usr/share/zsh/site-functions/_code-insiders
 
 install -pDm644 %{SOURCE1} %{buildroot}/usr/share/applications/vscode-insider.desktop
 
@@ -41,13 +40,13 @@ install -pDm644 %{SOURCE1} %{buildroot}/usr/share/applications/vscode-insider.de
 /opt/vscode-insider/*
 
 /usr/share/icons/vscode-insider.png
-/usr/share/bash-completion/completions/code-insider
-/usr/share/zsh/site-functions/_code-insider
+/usr/share/bash-completion/completions/code-insiders
+/usr/share/zsh/site-functions/_code-insiders
 /usr/share/applications/vscode-insider.desktop
 
-%ghost /usr/bin/code-insider
+%ghost /usr/bin/code-insiders
 
 %post
-ln -s /opt/vscode-insider/bin/code /usr/bin/code-insider
+ln -s /opt/vscode-insider/bin/code /usr/bin/code-insiders
 
 %changelog
