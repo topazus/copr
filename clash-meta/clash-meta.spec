@@ -10,9 +10,9 @@ License:        MIT
 URL:            https://github.com/MetaCubeX/Clash.Meta
 #Source:
 Source1:        https://raw.githubusercontent.com/topazus/copr/main/clash-meta/clash-meta.service
+Source2:        https://github.com/Dreamacro/maxmind-geoip/releases/download/20221212/Country.mmdb
 
 BuildRequires:  gcc pkg-config git wget
-BuildRequires:  systemd-rpm-macros
 
 %description
 Another Clash Kernel
@@ -29,12 +29,15 @@ go build
 
 %install
 install -pDm755 clash %{buildroot}%{_bindir}/clash-meta
-install -pDm644 %{SOURCE1} %{buildroot}%{_unitdir}/clash-meta.service
+install -pDm644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/clash-meta.service
+mkdir -p %{buildroot}/etc/clash-meta
+install -pDm644 %{SOURCE2} %{buildroot}/etc/clash-meta/Country.mmdb
 
 %check
 
 %files
 %{_bindir}/clash-meta
-%{_unitdir}/clash-meta.service
+/usr/lib/systemd/system/clash-meta.service
+/etc/clash-meta/Country.mmdb
 
 %changelog
