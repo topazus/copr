@@ -12,7 +12,7 @@ URL:            https://github.com/Dreamacro/clash
 Source1:        https://raw.githubusercontent.com/topazus/copr/main/clash/clash.service
 Source2:        https://github.com/Dreamacro/maxmind-geoip/releases/download/20221212/Country.mmdb
 
-BuildRequires:  pkg-config wget
+BuildRequires:  pkg-config wget git
 
 %description
 A rule-based tunnel in Go.

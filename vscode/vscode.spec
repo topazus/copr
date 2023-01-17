@@ -12,7 +12,12 @@ URL:            https://code.visualstudio.com/
 Source0:        https://update.code.visualstudio.com/latest/linux-x64/stable
 Source1:        https://raw.githubusercontent.com/topazus/copr/main/vscode/vscode.desktop
 
-Requires:       libxkbfile xdg-utils
+%if %{?fedora}
+Requires:       libxkbfile
+%elif %{?suse_version}
+Requires:       libxkbfile1
+
+Requires:       xdg-utils
 
 %description
 Visual Studio Code (vscode): Editor for building and debugging modern web and cloud applications (official binary version)

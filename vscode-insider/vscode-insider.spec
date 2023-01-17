@@ -11,7 +11,12 @@ URL:            https://code.visualstudio.com/
 Source0:        https://update.code.visualstudio.com/latest/linux-x64/insider
 Source1:        https://raw.githubusercontent.com/topazus/copr/main/vscode-insider/vscode-insider.desktop
 
-Requires:       libxkbfile xdg-utils
+%if %{?fedora}
+Requires:       libxkbfile
+%elif %{?suse_version}
+Requires:       libxkbfile1
+
+Requires:       xdg-utils
 
 %description
 Visual Studio Code Insiders
