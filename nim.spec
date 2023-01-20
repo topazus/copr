@@ -1,61 +1,62 @@
 %global debug_package %{nil}
+%global build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
 %global appname nim
 
-Name:           %{appname}
-Version:        1.4.8
+Name:           %{appname}-git
+Version:        %{build_timestamp}
 Release:        1%{?dist}
 Summary:        A statically typed compiled systems programming language
 License:        MIT
-URL:            https://nim-lang.org/
-Source:         https://nim-lang.org/download/nim-%{version}.tar.xz
+URL:            https://github.com/nim-lang/Nim
+#Source:
 
-BuildRequires: gcc make git
+BuildRequires:  gcc make git
 
-Requires: pcre openssl
+Requires:       pcre openssl
 
 %description
-Nim is a statically typed compiled systems programming language. It combines successful concepts from mature languages like Python, Ada and Modula. Its design focuses on efficiency, expressiveness, and elegance (in that order of priority).
+Nim is a statically typed compiled systems programming language.
 
 %prep
-%autosetup -n nim-%{version} -p1
+git clone --depth=1 %{url} .
 
 %build
-bash build.sh
-bin/nim c koch
-./koch boot -d:release
-./koch tools
+./build_all.sh
+
 
 %install
-install -Dpm 0755 bin/* -t %{buildroot}%{_bindir}
+./koch install %{buildroot}
 
-mkdir -p %{buildroot}%{_prefix}/lib/nim %{buildroot}%{_includedir}
+mkdir -p %{buildroot}%{_bindir}
+install -pDm755 bin/nim* -t %{buildroot}%{_bindir}
 
-cp -a lib compiler %{buildroot}%{_prefix}/lib/nim
+#for x in nim nimble nimgrep nimpretty nimsuggest; do
+#  install -pDm755 bin/$x %{buildroot}%{_bindir}/$x
+#done
 
-install -Dpm 0644 config/* -t %{buildroot}%{_sysconfdir}/nim
+mkdir -p %{buildroot}/usr/lib/nim %{buildroot}%{_includedir}
+
+cp -r %{buildroot}/nim/lib %{buildroot}/nim/compiler %{buildroot}/usr/lib/nim
+
+install -pDm644 config/* -t %{buildroot}%{_sysconfdir}/nim
 
 # completions
-install -Dpm 0644 tools/nim.bash-completion %{buildroot}%{_datadir}/bash-completion/completions/nim
-install -Dpm 0644 tools/nim.zsh-completion %{buildroot}%{_datadir}/zsh/site-functions/_nim
+install -pDm644 tools/nim.bash-completion %{buildroot}%{_datadir}/bash-completion/completions/nim
+install -pDm644 tools/nim.zsh-completion %{buildroot}%{_datadir}/zsh/site-functions/_nim
 
-install -Dpm 0644 dist/nimble/nimble.bash-completion %{buildroot}%{_datadir}/bash-completion/completions/nimble
-install -Dpm 0644 dist/nimble/nimble.zsh-completion %{buildroot}%{_datadir}/zsh/site-functions/_nimble
+install -pDm644 dist/nimble/nimble.bash-completion %{buildroot}%{_datadir}/bash-completion/completions/nimble
+install -pDm644 dist/nimble/nimble.zsh-completion %{buildroot}%{_datadir}/zsh/site-functions/_nimble
+
+rm -rf %{buildroot}/nim
 
 %check
 
 %files
-%license copying.txt
 %{_bindir}/nim*
-%{_bindir}/testament
 
-%{_prefix}/lib/nim/*
+/usr/lib/nim/
 
-%dir %{_sysconfdir}/nim
-%{_sysconfdir}/nim/config.nims
-%{_sysconfdir}/nim/nim.cfg
-%{_sysconfdir}/nim/nimdoc.cfg
-%{_sysconfdir}/nim/nimdoc.tex.cfg
-%{_sysconfdir}/nim/rename.rules.cfg
+/etc/nim/
 
 %{_datadir}/bash-completion/completions/*
 %{_datadir}/zsh/site-functions/_*

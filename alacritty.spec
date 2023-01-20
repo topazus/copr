@@ -11,14 +11,15 @@ License:        ASL 2.0 or MIT
 URL:            https://github.com/alacritty/alacritty
 #Source:
 
-BuildRequires:  gcc-c++ pkg-config desktop-file-utils git
-BuildRequires:  cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel
+BuildRequires:  gcc-c++ pkg-config git
+BuildRequires:  cmake freetype-devel fontconfig-devel
+BuildRequires:  desktop-file-utils libxcb-devel libxkbcommon-devel
 
 %description
 Fast, cross-platform, OpenGL terminal emulator.
 
 %prep
-git clone --depth=1 https://github.com/alacritty/alacritty.git .
+git clone --depth=1 %{url} .
 
 if [ ! -d $HOME/.cargo ]; then
   curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y

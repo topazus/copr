@@ -1,15 +1,17 @@
 %global debug_package %{nil}
 %define sys_jdk 0
+%global build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
+%global appname scala3
 
-Name:           scala3
-Version:        3.2.1
+Name:           %{appname}-git
+Version:        %{build_timestamp}
 Release:        1%{?dist}
 Summary:        A next-generation compiler for Scala
 License:        ASL 2.0
 URL:            https://github.com/lampepfl/dotty
-Source:         %{url}/archive/%{version}.tar.gz
+#Source:
 
-BuildRequires:  pkg-config sbt wget
+BuildRequires:  pkg-config sbt wget git
 
 Requires:       java-17-openjdk
 
@@ -17,11 +19,11 @@ Requires:       java-17-openjdk
 A next-generation compiler for Scala
 
 %prep
-%autosetup -n dotty-%{version}
+git clone --depth=1 %{url} .
 %if !%sys_jdk
-wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz -P $HOME
-tar xvf $HOME/jdk-*.tar.gz
-mv $HOME/jdk-* $HOME/jdk
+wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+tar xvf jdk-17_linux-x64_bin.tar.gz -C $HOME
+mv $HOME/jdk-*/ $HOME/jdk
 %endif
 
 %build
@@ -47,7 +49,7 @@ rm %{buildroot}/opt/scala3/bin/*.bat
 
 %ghost /usr/bin/scala3
 %ghost /usr/bin/scalac3
-%ghost %{buildroot}/usr/bin/scala3doc
+%ghost /usr/bin/scala3doc
 %post
 ln -s /opt/scala3/bin/scala3 /usr/bin/scala3
 ln -s /opt/scala3/bin/scalac3 /usr/bin/scalac3

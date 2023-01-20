@@ -37,7 +37,7 @@ install -pDm644 %{SOURCE2} %{buildroot}/etc/clash/Country.mmdb
 
 %files
 %{_bindir}/%{appname}
-/etc/systemd/system/clash.service
-
+/usr/lib/systemd/system/clash.service
+/etc/clash/Country.mmdb
 
 %changelog
